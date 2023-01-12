@@ -1,0 +1,22 @@
+body{
+margin: 0;
+font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+.hero-image{
+background-image: url(../images/Fotor_AI.png);    
+background-color: #cccccc;
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
+height: 1000px;
+position: relative;
+}
+
+.hero-text{
+    text-align: center;
+    position: absolute;
+    top:50%;
+    left: 40%;
+    transform: (-50%,-50%);
+    color: white;
+}
