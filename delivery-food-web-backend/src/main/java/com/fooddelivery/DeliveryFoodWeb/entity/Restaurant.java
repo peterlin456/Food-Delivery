@@ -18,22 +18,14 @@ public class Restaurant {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "image_url")
+    private String imageUrl;
 
-    @Column(name = "type")
-    private String type;
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
-    @Column(name = "status")
-    private boolean active;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "resturant_address_id", referencedColumnName = "id")
-    private Address resturantAddress;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "restaurant")
-    private Set<ProductCategory> productCategories;
-
+    @Column(name = "address")
+    private String address;
 
 
 }

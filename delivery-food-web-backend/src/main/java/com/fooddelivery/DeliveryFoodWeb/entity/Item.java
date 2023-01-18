@@ -6,9 +6,9 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "product")
+@Table(name = "item")
 @Data
-public class Product {
+public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -17,14 +17,20 @@ public class Product {
     @Column(name = "image_url")
     private String imageUrl;
 
+    @Column(name = "description")
+    private String description;
+
     @Column(name = "name")
     private String name;
 
-    @Column(name = "unit_price")
+    @Column(name = "price")
     private BigDecimal unitPrice;
 
-    @Column(name = "active")
-    private boolean active;
+    @ManyToOne
+    @JoinColumn(name = "item_category_id")
+    private ItemCategory itemCategory;
+
+
 
 
 }
