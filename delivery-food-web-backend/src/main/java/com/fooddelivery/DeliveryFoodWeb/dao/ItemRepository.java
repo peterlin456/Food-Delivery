@@ -1,16 +1,18 @@
 package com.fooddelivery.DeliveryFoodWeb.dao;
 
 import com.fooddelivery.DeliveryFoodWeb.entity.Item;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.fooddelivery.DeliveryFoodWeb.entity.ItemCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface ItemRepository extends JpaRepository<Item,Long> {
 
 
 
-public interface ItemRepository extends JpaRepository<Item, Long> {
+    List<Item> findByNameContainingIgnoreCase(String name);
 
-    Page<Item> findByCategoryId(@Param("id") Long id, Pageable pageable);
-
-    Page<Item> findByNameContaining(@Param("name") String name, Pageable pageable);
 }

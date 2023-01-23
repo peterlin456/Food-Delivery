@@ -9,6 +9,7 @@ import lombok.Data;
 public class ItemCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "item_category_id")
     private Long itemCategoryId;
 
     @Column(name = "name", nullable = false)

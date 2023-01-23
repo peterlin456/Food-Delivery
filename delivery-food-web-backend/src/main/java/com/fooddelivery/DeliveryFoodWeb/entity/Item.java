@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "item_id")
     private Long id;
 
     @Column(name = "image_url")
