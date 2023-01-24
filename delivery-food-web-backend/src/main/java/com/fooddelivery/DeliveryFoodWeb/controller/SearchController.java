@@ -24,4 +24,7 @@ public class SearchController {
 
         return new ResponseEntity<>(searchService.searchItems(name), HttpStatus.OK);
     }
+
+
+
 }

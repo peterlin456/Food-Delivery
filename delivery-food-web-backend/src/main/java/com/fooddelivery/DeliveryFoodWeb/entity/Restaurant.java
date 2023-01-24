@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.Set;
 
 @Entity
-@Table(name = "list_restaurant")
+@Table(name = "restaurant")
 @Data
 public class Restaurant {
 
