@@ -2,6 +2,7 @@ package com.fooddelivery.DeliveryFoodWeb.service;
 
 import com.fooddelivery.DeliveryFoodWeb.dao.MenuRepository;
 import com.fooddelivery.DeliveryFoodWeb.entity.Menu;
+import com.fooddelivery.DeliveryFoodWeb.entity.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ public class MenuSearchServiceImpl implements MenuSearchService{
     private MenuRepository menuRepository;
 
     @Override
-    public Long findRestaurantIdByItemId(Long itemId) {
+    public List<Restaurant> findRestaurantIdByItemId(Long itemId) {
         return menuRepository.findRestaurantIdByItemId(itemId);
     }
 }

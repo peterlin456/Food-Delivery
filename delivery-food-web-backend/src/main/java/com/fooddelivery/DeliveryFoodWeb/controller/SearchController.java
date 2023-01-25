@@ -3,7 +3,7 @@ package com.fooddelivery.DeliveryFoodWeb.controller;
 
 import com.fooddelivery.DeliveryFoodWeb.entity.Item;
 import com.fooddelivery.DeliveryFoodWeb.service.SearchService;
-import com.fooddelivery.DeliveryFoodWeb.service.SearchServiceimpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -19,6 +19,7 @@ public class SearchController {
     @Autowired
     private SearchService searchService;
 
+    //get all items that contains specific name;
     @GetMapping("/search")
     public ResponseEntity<List<Item>> search(@RequestParam("name") String name) {
 

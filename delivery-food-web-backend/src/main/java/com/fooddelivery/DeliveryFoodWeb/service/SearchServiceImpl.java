@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SearchServiceimpl implements SearchService {
+public class SearchServiceImpl implements SearchService {
 
     @Autowired
     private ItemRepository itemRepository;

@@ -2,6 +2,7 @@ package com.fooddelivery.DeliveryFoodWeb.controller;
 
 
 import com.fooddelivery.DeliveryFoodWeb.entity.Menu;
+import com.fooddelivery.DeliveryFoodWeb.entity.Restaurant;
 import com.fooddelivery.DeliveryFoodWeb.service.MenuSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,11 +17,11 @@ import java.util.List;
 public class MenuController {
     @Autowired
     private MenuSearchService menuSearchService;
-
+// find the restaurant that have item id
     @GetMapping("/restaurant/item/{itemId}")
-    public ResponseEntity<Long> getRestaurantIdByItemId(@PathVariable Long itemId) {
-        Long restaurantId = menuSearchService.findRestaurantIdByItemId(itemId);
-        return new ResponseEntity<>(restaurantId, HttpStatus.OK);
+    public ResponseEntity<List<Restaurant>> getRestaurantIdByItemId(@PathVariable Long itemId) {
+        List<Restaurant> restaurants= menuSearchService.findRestaurantIdByItemId(itemId);
+        return new ResponseEntity<>(restaurants, HttpStatus.OK);
     }
 
 }
