@@ -2,6 +2,7 @@ import NavBar from "./Navbar";
 import Iconbar from "./Iconbar";
 import BackGround from "./background";
 import "../styles/home.css";
+import Footer from "./Footer";
 function Home() {
   return (
     <html>
@@ -9,8 +10,9 @@ function Home() {
     <body>
     <div class = 'home'>
    <NavBar></NavBar>
-   <Iconbar></Iconbar>
+   {/* <Iconbar></Iconbar> */}
    <BackGround></BackGround>
+   <Footer></Footer>
    </div>
    </body>
    </html>
