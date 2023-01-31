@@ -1,0 +1,9 @@
+.search-bar{
+    position: relative;
+}
+
+.search-location-list-group{
+    position: absolute;
+    width: 100%;
+    font-size:14px;
+}

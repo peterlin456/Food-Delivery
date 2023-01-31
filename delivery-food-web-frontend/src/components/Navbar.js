@@ -1,60 +1,71 @@
+import React from 'react'
+import axios from 'axios';
+import {useState,useEffect} from 'react'
+import{Link,useNavigate} from 'react-router-dom'
 
 
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import 'bootstrap/dist/css/bootstrap.min.css';
+export default function Navbar() {
+  const navigate = useNavigate();
+  const [query,setQuery]=useState("");
+  const [resturant,setResturant] =useState({
+    name:"",
+    phone:"",
+    address:""
+},[]);
+  const handleSubmit= async (e)=>{
+    e.preventDefault();
+    navigate('/');
+  }
+  useEffect(()=>{
+    handleSearch();
+},[])
+const handleSearch=(async (e) =>{ 
+   const result= await axios.get(`http://localhost:8080/api/v1/restaurant/search?name=${query}`);
+   setResturant(result.data[0]);
+})
 
+  return (
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></hr></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled">Disabled</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search" onSubmit={handleSubmit}>
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={async (e) =>{
+          setQuery(e.target.value)
+          const res = handleSearch(query)
+    
+        }}></input>
+        <Link class="btn btn-outline-success" type="submit" 
+        to='/resturant' state={resturant}>Search</Link>
 
-
-function NavBar(){
-return(
-<div className="Home-page">
-<header className="Home">
-<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-<Container>
-  <Navbar.Brand href="#home">Fast Food Delivery</Navbar.Brand>
-  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-  <Navbar.Collapse id="responsive-navbar-nav">
-    <Nav className="me-auto">
-      <Nav.Link href="#features">Features</Nav.Link>
-      <Nav.Link href="#pricing">Pricing</Nav.Link>
-      <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.2">
-          Another action
-        </NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-        <NavDropdown.Divider />
-        <NavDropdown.Item href="#action/3.4">
-          Separated link
-        </NavDropdown.Item>
-      </NavDropdown>
-    </Nav>
-    <Nav>
-    <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form>
-      <Nav.Link href="#deets">Log In</Nav.Link>
-      <Nav.Link eventKey={2} href="#memes">
-       Sign up
-      </Nav.Link>
-    </Nav>
-  </Navbar.Collapse>
-</Container>
-</Navbar>
-</header>
-</div>
-);
+      </form>
+    </div>
+  </div>
+</nav>
+  )
 }
-
-export default NavBar ;
