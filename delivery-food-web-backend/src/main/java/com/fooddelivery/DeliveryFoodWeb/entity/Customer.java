@@ -2,25 +2,33 @@ package com.fooddelivery.DeliveryFoodWeb.entity;
 
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+import java.time.LocalDateTime;
+
+@Getter
+@Setter
 @Entity
-@Table(name="users")
+@Table(name="customer")
 public class Customer {
-    
-    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable=false)
-    private String name;
+    @Column(name = "firstname", nullable = false, length = 20)
+    private String firstname;
 
-    @Column(nullable=false, unique=true)
+    @Column(name = "lastname", nullable = false, length = 20)
+    private String lastname;
+
+    @Column(name = "email", nullable=false, unique=true)
     private String email;
 
-    @Column(nullable=false)
+    @Column(name = "password", nullable = false, length = 64)
     private String password;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 }
