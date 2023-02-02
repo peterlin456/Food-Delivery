@@ -7,9 +7,9 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+@Entity
 @Getter
 @Setter
-@Entity
 @Table(name="customer")
 public class User {
 
@@ -29,14 +29,5 @@ public class User {
     @Column(name = "password", nullable = false, length = 64)
     private String password;
 
-    public User(String firstname, String lastname, String password, String email) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
-        this.password = password;
-    }
 
-    public User() {
-
-    }
 }

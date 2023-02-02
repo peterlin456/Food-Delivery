@@ -1,10 +1,10 @@
 package com.fooddelivery.DeliveryFoodWeb.service;
 
-import com.fooddelivery.DeliveryFoodWeb.entity.Menu;
-import com.fooddelivery.DeliveryFoodWeb.entity.Restaurant;
+import com.fooddelivery.DeliveryFoodWeb.entity.Item;
+
 
 import java.util.List;
 
 public interface MenuSearchService {
-    public List<Restaurant> findRestaurantIdByItemId(Long itemId);
+    public List<Long> findItemIdByRestaurantId(Long RestaurantId);
 }
