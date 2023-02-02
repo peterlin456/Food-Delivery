@@ -11,16 +11,16 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table(name="customer")
-public class Customer {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "firstname", nullable = false, length = 20)
+    @Column(name = "first_name", nullable = false, length = 20)
     private String firstname;
 
-    @Column(name = "lastname", nullable = false, length = 20)
+    @Column(name = "last_name", nullable = false, length = 20)
     private String lastname;
 
     @Column(name = "email", nullable=false, unique=true)
@@ -29,6 +29,14 @@ public class Customer {
     @Column(name = "password", nullable = false, length = 64)
     private String password;
 
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    public User(String firstname, String lastname, String password, String email) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User() {
+
+    }
 }

@@ -1,40 +1,47 @@
 package com.fooddelivery.DeliveryFoodWeb;
 
+
 import static org.assertj.core.api.Assertions.assertThat;
-import com.fooddelivery.DeliveryFoodWeb.dao.CustomerRepository;
-import com.fooddelivery.DeliveryFoodWeb.entity.Customer;
+
+import com.fooddelivery.DeliveryFoodWeb.dto.UserServiceRegistrationDto;
+import com.fooddelivery.DeliveryFoodWeb.entity.User;
+import com.fooddelivery.DeliveryFoodWeb.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
 
 
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
-public class CustomerRepositoryTests {
+public class CustomerRepositoryTest {
 
     @Autowired
     private TestEntityManager entityManager;
 
     @Autowired
-    private CustomerRepository customerRepository ;
+    private UserService userService;
 
     @Test
     public void testCreateUser() {
-        Customer customer = new Customer();
-        customer.setEmail("ravikumar@gmail.com");
-        customer.setPassword("ravi2020");
-        customer.setFirstName("Ravi");
-        customer.setLastName("Kumar");
+        // given
+        UserServiceRegistrationDto user = new UserServiceRegistrationDto();
+        user.setFirstname("John");
+        user.setLastname("Doe");
+        user.setEmail("john.doe@example.com");
+        user.setPassword("password");
 
-        Customer savedUser = customerRepository.save(customer);
 
-        Customer existUser = entityManager.find(Customer.class, savedUser.getId());
+        // when
+        User saveUser = userService.save(user);
 
-        assertThat(customer.getEmail()).isEqualTo(existUser.getEmail());
-
+        // then
+        assertThat(saveUser.getEmail()).isEqualTo(user.getEmail());
     }
+
+
 }

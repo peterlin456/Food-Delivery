@@ -18,6 +18,11 @@ public class MenuController {
     @Autowired
     private MenuSearchService menuSearchService;
 // find the restaurant that have item id
+
+
+    //this need change
+    //know restaurant id, get all the items in the restaurant
+
     @GetMapping("/restaurant/item/{itemId}")
     public ResponseEntity<List<Restaurant>> getRestaurantIdByItemId(@PathVariable Long itemId) {
         List<Restaurant> restaurants= menuSearchService.findRestaurantIdByItemId(itemId);
