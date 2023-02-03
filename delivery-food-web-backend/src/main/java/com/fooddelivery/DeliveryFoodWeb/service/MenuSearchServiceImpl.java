@@ -15,7 +15,7 @@ public class MenuSearchServiceImpl implements MenuSearchService{
     private MenuRepository menuRepository;
 
     @Override
-    public List<Long> findItemIdByRestaurantId(Long RestaurantId) {
+    public List<Item> findItemIdByRestaurantId(Long RestaurantId) {
         return menuRepository.findItemIdByRestaurantId(RestaurantId);
     }
 }

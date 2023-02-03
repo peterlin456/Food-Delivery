@@ -30,8 +30,8 @@ public class MenuController {
 //        return new ResponseEntity<>(restaurants, HttpStatus.OK);
 //    }
     @GetMapping("/restaurant/{RestaurantId}")
-    public ResponseEntity<List<Long>> getItemIdByRestaurantId(@PathVariable Long RestaurantId) {
-        List<Long> items = menuSearchService.findItemIdByRestaurantId(RestaurantId);
+    public ResponseEntity<List<Item>> getItemIdByRestaurantId(@PathVariable Long RestaurantId) {
+        List<Item> items = menuSearchService.findItemIdByRestaurantId(RestaurantId);
         return new ResponseEntity<>(items, HttpStatus.OK);
     }
 }

@@ -6,5 +6,5 @@ import com.fooddelivery.DeliveryFoodWeb.entity.Item;
 import java.util.List;
 
 public interface MenuSearchService {
-    public List<Long> findItemIdByRestaurantId(Long RestaurantId);
+    public List<Item> findItemIdByRestaurantId(Long RestaurantId);
 }
