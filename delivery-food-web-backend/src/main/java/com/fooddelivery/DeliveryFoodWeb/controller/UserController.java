@@ -1,13 +1,14 @@
 package com.fooddelivery.DeliveryFoodWeb.controller;
 
 
-
 import com.fooddelivery.DeliveryFoodWeb.entity.User;
 import com.fooddelivery.DeliveryFoodWeb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
+
 
 
 @RestController
@@ -19,16 +20,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
-    @PostMapping("/registration")
-    public String registerUserAccount(@RequestBody User user){
-
-        User createUser = userService.registrationUser(user.getEmail(),
-                user.getFirstname(), user.getLastname(), user.getPassword());
-
-        //this should change to string saying "Hi xxxx your account sign up successfully"
-        return createUser.getFirstname() + " your account set up successfully";
-    }
 
     @PostMapping("/login")
     public String loginUserAccount(@RequestBody User user){
@@ -42,5 +33,42 @@ public class UserController {
         }
 
     }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody User user) {
+        if (userService.existsByEmail(user.getEmail())) {
+            return new ResponseEntity<>("Email is already taken!",
+                    HttpStatus.BAD_REQUEST);
+        }
+
+
+
+        User registeredUser = userService.register(user);
+
+        return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
+    }
+
+    //	public static final Logger logger = LoggerFactory.getLogger(AccountController.class);
+    // request method to create a new account by a guest
+//    @RequestMapping(value = "/register", method = RequestMethod.POST)
+//    public ResponseEntity<?> createUser(@RequestBody User newUser) {
+//        if (userService.find(newUser.getUsername()) != null) {
+//            logger.error("username Already exist " + newUser.getUsername());
+//            return new ResponseEntity(
+//                    new CustomErrorType("user with username " + newUser.getUsername() + "already exist "),
+//                    HttpStatus.CONFLICT);
+//        }
+//        newUser.setRole("USER");
+//
+//        return new ResponseEntity<User>(userService.save(newUser), HttpStatus.CREATED);
+//    }
+//
+//    // this is the login api/service
+//    @CrossOrigin
+//    @RequestMapping("/login")
+//    public Principal user(Principal principal) {
+//        logger.info("user logged "+principal);
+//        return principal;
+//    }
 
 }
