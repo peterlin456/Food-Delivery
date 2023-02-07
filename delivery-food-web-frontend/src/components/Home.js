@@ -4,17 +4,14 @@ import "../styles/home.css";
 import Footer from "./Footer";
 function Home() {
   return (
-    <html>
-    <head></head>
-    <body>
-    <div class = 'home'>
+
+    <div className = 'home'>
    
    {/* <Iconbar></Iconbar> */}
    <BackGround></BackGround>
    {/* <Footer></Footer> */}
    </div>
-   </body>
-   </html>
+
   );
 }
 
