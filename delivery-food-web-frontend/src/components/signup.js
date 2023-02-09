@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Form, Button, FormGroup,FormControl, ControlLabel } from "react-bootstrap";
-
+import "../styles/userpage.css"
 class Signup extends Component {
     constructor(props) {
         super(props)

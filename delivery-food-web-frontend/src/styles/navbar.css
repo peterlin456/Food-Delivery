@@ -3,11 +3,17 @@
 }
 
 .search-location-list-group{
-    position: absolute;
+    position: absolute,;
     width: 100%;
     font-size:14px;
 }
 
+.navbar {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
 
 .btn-circle {
     margin: 10px;
