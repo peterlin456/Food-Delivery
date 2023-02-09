@@ -1,0 +1,17 @@
+.search-bar{
+    position: relative;
+}
+
+.search-location-list-group{
+    position: absolute;
+    width: 100%;
+    font-size:14px;
+}
+
+
+.btn-circle {
+    margin: 10px;
+    border-radius: 15px;
+    text-align: center;
+    
+}
