@@ -9,10 +9,11 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/v1")
 public class UserController {
 
@@ -22,14 +23,15 @@ public class UserController {
 
 
     @PostMapping("/login")
-    public String loginUserAccount(@RequestBody User user){
-        User loginuser = userService.authenticateUser(user.getEmail(),user.getPassword());
+    public ResponseEntity<?> loginUserAccount(@RequestBody User user){
+        boolean loginuser = userService.authenticateUser(user.getEmail(), user.getPassword());
 
-        if(loginuser != null){
-            return "login successful";
+        if(loginuser == true){
+            return new ResponseEntity<>("User Login", HttpStatus.OK);
         }
         else{
-            return "error";
+            return new ResponseEntity<>("Wrong Credentials",
+                    HttpStatus.BAD_REQUEST);
         }
 
     }

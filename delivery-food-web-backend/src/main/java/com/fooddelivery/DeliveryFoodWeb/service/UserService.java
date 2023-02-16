@@ -15,7 +15,7 @@ public interface UserService {
 
 //    User registrationUser(String email, String firstname, String lastname, String password);
 //
-    User authenticateUser(String email, String password);
+    boolean authenticateUser(String email, String password);
 
 
 }

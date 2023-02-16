@@ -1,57 +1,99 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Component, useState } from "react";
-import "../styles/userpage.css"
-
+import {  useState } from "react";
+import "../styles/userpage.css";
+import { Navigate } from 'react-router-dom';
+import { Button } from "react-bootstrap";
 
 export default function login() {
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const[email,setEmail] = useState('');
+  const[password, setPassword] = useState('');
+  const[dir,setSet] = useState('');
+
+  // States for checking the errors
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
+
+  // Handling the email change
+  const handleEmail = (e) => {
+  setEmail(e.target.value);
+  setSubmitted(false);
+  };
+  
+  // Handling the password change
+  const handlePassword = (e) => {
+  setPassword(e.target.value);
+  setSubmitted(false);
+  };
+  
 
   const onSubmit = (e) => {
     e.preventDefault();
+    const test = {email,password};
+    
+    if ( email === '' || password === '') {
+      setError(true);
+      
+      }else{
+        setSubmitted(true);
+        setError(false);
+        setSet(true);
+        fetch("http://localhost:8080/api/v1/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(test)
+      }).then(() => (console.log("Login!")));
+      
+      }
 
-    const formData = new FormData(e.target);
+      
+   
+      // .then((data) => {
+      //   if(data.fieldErrors) {
+      //     data.fieldErrors.forEach(fieldError => {
+      //       if(fieldError.field === 'email'){
+      //         setEmailError(fieldError.message);
+      //       }
 
-    fetch("http://localhost:8080/login", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: formData.get('email'),
-        password: formData.get('password'),
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if(data.fieldErrors) {
-          data.fieldErrors.forEach(fieldError => {
-            if(fieldError.field === 'email'){
-              setEmailError(fieldError.message);
-            }
-
-            if(fieldError.field === 'password'){
-              setPasswordError(fieldError.message);
-            }
-          });
-        } else {
-          alert("Success !!");
-        }
-      })
-      .catch((err) => err);
+      //       if(fieldError.field === 'password'){
+      //         setPasswordError(fieldError.message);
+      //       }
+      //     });
+      //   } else {
+      //     alert("Success !!");
+      //   }
+      // })
+      // .catch((err) => err);
   }
 
-  const onEmailFocus = (e) => {
-    e.preventDefault();
-    setEmailError('');
-  }
+  const errorMessage = () => {
+    return (
+    <div className="error"
+    style={{
+      color:"orange",
+      fontSize: "15px",
+      display: error ? '' : 'none'
+      }}>
+    Please enter all the fields with correct credentials
+    </div>
+    );
+    };  
 
-  const onPasswordFocus = (e) => {
-    e.preventDefault();
-    setPasswordError('');
-  }
-  
+    const successMessage = () => {
+
+      return (
+      <div
+      className="success"
+      style={{
+      display: submitted ? '' : 'none',
+      color:"green",
+      fontSize:"15px"
+      }}>
+      User successfully registered!!
+      </div>
+      );
+      };
 
   return (
     <div className="App">
@@ -166,13 +208,15 @@ export default function login() {
                   <span className="padding-bottom--15">
                     Sign in to your account
                   </span>
-                  <form id="stripe-login" method="POST" autoComplete="off" onSubmit={onSubmit}>
+                  <div className="messages">
+                      {errorMessage()}
+                      {successMessage()}
+                  </div>
+                  <form id="stripe-login" method="POST" autoComplete="off" >
                     <div className="field padding-bottom--24">
                       <label htmlFor="email">Email</label>
-                      <input type="text" name="email" onFocus={onEmailFocus}/>
-                      {
-                        emailError ? <span style={{ color: 'red', fontSize: '12px'}}>{emailError}</span> : ''
-                      }
+                      <input value={email} type="text" name="email"   
+                      onChange={handleEmail} />
                     </div>
                     <div className="field padding-bottom--24">
                       <div className="grid--50-50">
@@ -181,10 +225,9 @@ export default function login() {
                           <a href="/">Forgot your password?</a>
                         </div> */}
                       </div>
-                      <input type="password" name="password" onFocus={onPasswordFocus}/>
-                      {
-                        passwordError ? <span style={{ color: 'red', fontSize: '12px'}}>{passwordError}</span> : ''
-                      }
+                      <input type="password" name="password"
+                         value={password} 
+                         onChange={handlePassword} ></input>
                     </div>
                     {/* <div className="field field-checkbox padding-bottom--24 flex-flex align-center">
                       <label htmlFor="checkbox">
@@ -193,7 +236,9 @@ export default function login() {
                       </label>
                     </div> */}
                     <div className="field padding-bottom--24">
-                      <input type="submit" name="submit" value="Continue" />
+                    <Button name="submit" type="submit" onClick={onSubmit}>Login</Button>{
+                         dir ?  (<Navigate to="/"></Navigate>): null
+                      }
                     </div>
                     {/* <div className="field">
                       <a className="ssolink" href="/">
