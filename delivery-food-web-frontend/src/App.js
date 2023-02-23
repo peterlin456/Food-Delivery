@@ -1,4 +1,5 @@
 import Home from './components/Home';
+import React, { useState } from 'react';
 import NavBar from './components/Navbar';
 import { BrowserRouter as Router,Route, Routes} from 'react-router-dom';
 import Resturant from './components/Resturant';
@@ -7,6 +8,13 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 
 function App() {
+
+const [token, setToken] = useState();
+
+if(!token) {
+    return <Login setToken={setToken} />
+  }
+
 
 
 return (
